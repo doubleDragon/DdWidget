@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!-- Nine Grid -->
+    <declare-styleable name="DdNineGridLayout">
+
+        <attr name="dd_child_width" format="dimension"/>
+        <attr name="dd_child_gap" format="dimension"/>
+        <attr name="dd_child_columns" format="integer"/>
+
+        <attr name="dd_child_mode" format="enum">
+            <enum name="mode_divide_equally" value="0"/>
+            <enum name="mode_divide_gap" value="1"/>
+        </attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="DdPhotoAddView">
+
+        <attr name="dd_photo_in_width" format="dimension"/>
+        <attr name="dd_photo_in_height" format="dimension"/>
+        <attr name="dd_photo_in_color" format="color"/>
+        <attr name="dd_photo_out_stroke" format="dimension"/>
+        <attr name="dd_photo_out_color" format="color"/>
+
+    </declare-styleable>
+    <!-- Nine Grid End-->
+
+
+
+    <!-- Refresh layout -->
+    <declare-styleable name="DdRefreshLayout">
+
+        <attr name="dd_pull_trigger_height" format="integer"/>
+        <attr name="dd_load_trigger_height" format="integer"/>
+
+    </declare-styleable>
+    <!-- Refresh layout end -->
+
+</resources>

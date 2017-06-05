@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context="com.wsl.library.widget.demo.MainActivity">
+
+
+    <include layout="@layout/layout_common_toolbar"/>
+
+    <TextView
+        android:id="@+id/add"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Add"
+        android:gravity="center"
+        android:background="#009988"
+        />
+
+    <TextView
+        android:id="@+id/remove"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Remove"
+        android:gravity="center"
+        android:background="#009900"
+        />
+
+    <com.wsl.library.widget.ninegrid.DdNineGridMoreLayout
+        android:id="@+id/nineGridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        app:dd_child_columns="3"
+        app:dd_child_width="80dp"
+        app:dd_child_mode="mode_divide_gap"
+        app:dd_child_gap="4dp"/>
+
+
+</LinearLayout>
