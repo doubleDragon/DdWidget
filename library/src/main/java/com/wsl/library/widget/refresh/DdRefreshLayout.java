@@ -52,6 +52,9 @@ public class DdRefreshLayout extends DdNestedLayout {
 
     private boolean mDebug = false;
 
+    private boolean mPullEnabled;
+    private boolean mLoadEnabled;
+
     public DdRefreshLayout(Context context) {
         this(context, null);
     }
@@ -194,6 +197,14 @@ public class DdRefreshLayout extends DdNestedLayout {
         }
     }
 
+    /**
+     * 下拉刷新和上啦加载更多至少有一个打开
+     * @return true
+     */
+    private boolean isConditionEnabled() {
+        return this.mPullEnabled || this.mLoadEnabled;
+    }
+
     private boolean isReturnOrResetState() {
         return mState > STATE_PULL_DRAG ||
                 mState < STATE_LOAD_DRAG;
@@ -202,7 +213,25 @@ public class DdRefreshLayout extends DdNestedLayout {
     @Override
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
         boolean start = super.onStartNestedScroll(child, target, nestedScrollAxes);
-        return start && !isReturnOrResetState();
+        return start && !isReturnOrResetState() && isConditionEnabled();
+    }
+
+    @Override
+    public void onNestedPreScroll(View child, int dx, int dy, int[] consumed) {
+        super.onNestedPreScroll(child, dx, dy, consumed);
+    }
+
+    @Override
+    public void onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
+        if(dyUnconsumed < 0 && !mPullEnabled) {
+            return;
+        }
+
+        if(dyUnconsumed > 0 && !mLoadEnabled) {
+            return;
+        }
+
+        super.onNestedScroll(target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
     }
 
     @Override
@@ -255,6 +284,14 @@ public class DdRefreshLayout extends DdNestedLayout {
         } else {
             autoScroll(-getCurrentOffset());
         }
+    }
+
+    public void setRefreshEnabled(boolean enabled) {
+        this.mPullEnabled = enabled;
+    }
+
+    public void setLoadEnabled(boolean enabled) {
+        this.mLoadEnabled = enabled;
     }
 
     private void dumpState(int state) {

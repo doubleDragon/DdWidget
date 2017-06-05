@@ -55,6 +55,10 @@ public class RefreshActivity extends BaseActivity{
         mAdapter = new RefreshAdapter(20);
         rvContent.setAdapter(mAdapter);
 
+
+        refreshLayout.setRefreshEnabled(false);
+        refreshLayout.setLoadEnabled(false);
+
         refreshLayout.setRefreshListener(new DdRefreshListener() {
             @Override
             public void onRefresh() {
@@ -77,7 +81,7 @@ public class RefreshActivity extends BaseActivity{
 
     public void fakeLoadResult() {
         mAdapter.add("pull item ");
-        refreshLayout.setRefresh(false);
+        refreshLayout.setLoad(false);
         LinearLayoutManager layoutManager = (LinearLayoutManager) rvContent.getLayoutManager();
         layoutManager.setStackFromEnd(true);
     }
