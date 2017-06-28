@@ -72,8 +72,6 @@ public class DdRefreshLayout extends DdNestedLayout {
         a.recycle();
     }
 
-
-
     private void setStateAndCallback(int state) {
         setState(state);
         if(state > 0) {

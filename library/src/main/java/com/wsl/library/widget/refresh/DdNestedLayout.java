@@ -6,6 +6,7 @@ import android.support.v4.view.NestedScrollingParent;
 import android.support.v4.view.NestedScrollingParentHelper;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,11 +30,14 @@ public class DdNestedLayout extends ViewGroup implements NestedScrollingParent {
     private View mFooterView;
     private int mFooterHeight;
 
+    private View mEmptyView;
 
 
     private DdNestedScrollerHelper<DdNestedLayout> mScrollerHelper;
     private NestedScrollingParentHelper mNestedScrollingParentHelper;
     private boolean mNestedScrollStart;
+
+    private DdRefreshEmptyController mEmptyController;
 
     public DdNestedLayout(Context context) {
         this(context, null);
@@ -56,6 +60,9 @@ public class DdNestedLayout extends ViewGroup implements NestedScrollingParent {
             }
         });
         mNestedScrollingParentHelper = new NestedScrollingParentHelper(this);
+
+
+        mEmptyController = new DdRefreshEmptyController();
     }
 
     void onCurrentOffsetChange(int offset) {
@@ -174,6 +181,26 @@ public class DdNestedLayout extends ViewGroup implements NestedScrollingParent {
         }
         mHeaderView = findViewById(R.id.dd_refresh_header);
         mFooterView = findViewById(R.id.dd_refresh_footer);
+
+        mEmptyView = findViewById(R.id.dd_refresh_empty);
+
+        if(mEmptyView != null) {
+            mEmptyController.setEmptyView(mEmptyView);
+            mEmptyController.handleContent(mContentView);
+        }
+    }
+
+    public void setEmptyView(int resId) {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        setEmptyView(inflater.inflate(resId, this, false));
+    }
+
+    public void setEmptyView(View emptyView) {
+        removeView(mEmptyView);
+        addView(emptyView);
+        this.mEmptyView = emptyView;
+        this.mEmptyController.setEmptyView(emptyView);
+        this.mEmptyController.handleContent(mContentView);
     }
 
     @Override
@@ -195,6 +222,11 @@ public class DdNestedLayout extends ViewGroup implements NestedScrollingParent {
             measureChild(footer, widthMeasureSpec, heightMeasureSpec);
             mFooterHeight = footer.getMeasuredHeight();
         }
+
+        if(mEmptyView != null) {
+            final View empty = mEmptyView;
+            measureChild(empty, widthMeasureSpec, heightMeasureSpec);
+        }
     }
 
     @Override
@@ -213,6 +245,10 @@ public class DdNestedLayout extends ViewGroup implements NestedScrollingParent {
         //layout footer
         if (mFooterView != null) {
             mFooterView.layout(0, height, width, height + mFooterHeight);
+        }
+
+        if(mEmptyView != null) {
+            mEmptyView.layout(0, 0, width, height);
         }
     }
 

@@ -4,5 +4,6 @@
     <item name="dd_refresh_content" type="id"/>
     <item name="dd_refresh_header" type="id"/>
     <item name="dd_refresh_footer" type="id"/>
+    <item name="dd_refresh_empty" type="id"/>
 
 </resources>

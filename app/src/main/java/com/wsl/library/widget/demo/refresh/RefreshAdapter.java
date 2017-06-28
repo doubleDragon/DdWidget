@@ -45,6 +45,15 @@ public class RefreshAdapter extends RecyclerView.Adapter{
         this.notifyItemRangeInserted(start, list.size());
     }
 
+    public void clear() {
+        if(data == null || data.isEmpty()) {
+            return;
+        }
+        int itemCount = getItemCount();
+        data.clear();
+        this.notifyItemRangeRemoved(0, itemCount);
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());

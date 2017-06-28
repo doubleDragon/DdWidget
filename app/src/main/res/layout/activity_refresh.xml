@@ -19,6 +19,8 @@
 
         <include layout="@layout/layout_refresh_footer" />
 
+        <include layout="@layout/layout_refresh_empty" />
+
     </com.wsl.library.widget.refresh.DdRefreshLayout>
 
 

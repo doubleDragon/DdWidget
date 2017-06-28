@@ -6,6 +6,7 @@ import android.os.Message;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.wsl.library.widget.demo.BaseActivity;
 import com.wsl.library.widget.demo.R;
@@ -52,12 +53,12 @@ public class RefreshActivity extends BaseActivity{
         rvContent.setLayoutManager(new LinearLayoutManager(this));
         rvContent.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new RefreshAdapter(20);
+        mAdapter = new RefreshAdapter(0);
         rvContent.setAdapter(mAdapter);
 
 
-        refreshLayout.setRefreshEnabled(false);
-        refreshLayout.setLoadEnabled(false);
+        refreshLayout.setRefreshEnabled(true);
+        refreshLayout.setLoadEnabled(true);
 
         refreshLayout.setRefreshListener(new DdRefreshListener() {
             @Override
@@ -72,6 +73,11 @@ public class RefreshActivity extends BaseActivity{
                 mHandler.sendEmptyMessageDelayed(1, 2000);
             }
         });
+
+
+        View empty = getLayoutInflater().inflate(R.layout.layout_refresh_empty_new, null);
+        refreshLayout.setEmptyView(empty);
+//        refreshLayout.setEmptyView(R.layout.layout_refresh_empty_new);
     }
 
     public void fakeRefreshResult() {
@@ -80,10 +86,8 @@ public class RefreshActivity extends BaseActivity{
     }
 
     public void fakeLoadResult() {
-        mAdapter.add("pull item ");
+        mAdapter.add("load item ");
         refreshLayout.setLoad(false);
-        LinearLayoutManager layoutManager = (LinearLayoutManager) rvContent.getLayoutManager();
-        layoutManager.setStackFromEnd(true);
     }
 
     private static class RefreshHandler extends Handler {
