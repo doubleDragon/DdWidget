@@ -7,7 +7,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.wsl.library.widget.demo.ninegrid.NinegridActivity;
+import com.wsl.library.widget.demo.ninegrid.add.NinegridAddActivity;
+import com.wsl.library.widget.demo.row.RowPhotoActivity;
 import com.wsl.library.widget.demo.refresh.RefreshActivity;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class MainActivity extends BaseActivity implements MainAdapter.Listener{
         List<MainItem> items = new ArrayList<>();
         items.add(new MainItem("Nine Grid"));
         items.add(new MainItem("Refresh layout"));
+        items.add(new MainItem("Row photo layout"));
 
         MainAdapter adapter = new MainAdapter(this, items);
         adapter.setListener(this);
@@ -50,10 +52,13 @@ public class MainActivity extends BaseActivity implements MainAdapter.Listener{
     public void onClickItem(int position) {
         switch (position) {
             case 0:
-                intentToActivity(NinegridActivity.class);
+                intentToActivity(NinegridAddActivity.class);
                 break;
             case 1:
                 intentToActivity(RefreshActivity.class);
+                break;
+            case 2:
+                intentToActivity(RowPhotoActivity.class);
                 break;
             default:
                 break;

@@ -1,4 +1,4 @@
-package com.wsl.library.widget.demo.ninegrid;
+package com.wsl.library.widget.demo.ninegrid.add;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -14,20 +14,20 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * NinegridActivity adapter
+ * NinegridAddActivity adapter
  * Created by wsl on 17/4/15.
  */
 
-class NinegridAdapter extends DdNineGridAppendAdapter<NinegridBean> {
+class NinegridAddAdapter extends DdNineGridAppendAdapter<NinegridAddBean> {
 
     private LayoutInflater mLayoutInflater;
     private Context mContext;
 
-    NinegridAdapter(Context context, List<NinegridBean> objects) {
+    NinegridAddAdapter(Context context, List<NinegridAddBean> objects) {
         this(context, objects, 9);
     }
 
-    NinegridAdapter(Context context, List<NinegridBean> objects, int max) {
+    NinegridAddAdapter(Context context, List<NinegridAddBean> objects, int max) {
         super(objects, max);
         this.mContext = context;
         this.mLayoutInflater = LayoutInflater.from(context);
@@ -37,7 +37,7 @@ class NinegridAdapter extends DdNineGridAppendAdapter<NinegridBean> {
     protected View getNormalView(int position) {
         View view = mLayoutInflater.inflate(R.layout.item_ninegrid_normal, null);
         ImageView imageView = (ImageView) view;
-        NinegridBean bean = getItem(position);
+        NinegridAddBean bean = getItem(position);
         Glide
                 .with(mContext)
                 .load(bean.url)

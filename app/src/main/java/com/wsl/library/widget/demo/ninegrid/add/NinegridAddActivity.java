@@ -1,4 +1,4 @@
-package com.wsl.library.widget.demo.ninegrid;
+package com.wsl.library.widget.demo.ninegrid.add;
 
 import android.os.Bundle;
 import android.view.View;
@@ -15,11 +15,11 @@ import java.util.Random;
  * 九宫格页面
  * Created by wsl on 17/6/5.
  */
-public class NinegridActivity extends BaseActivity {
+public class NinegridAddActivity extends BaseActivity {
 
     private List<String> URLS = new ArrayList<>();
 
-    NinegridAdapter adapter;
+    NinegridAddAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +47,12 @@ public class NinegridActivity extends BaseActivity {
             }
         });
 
-        List<NinegridBean> beanList = new ArrayList<>();
+        List<NinegridAddBean> beanList = new ArrayList<>();
         beanList.add(generateBean());
         beanList.add(generateBean());
         beanList.add(generateBean());
         beanList.add(generateBean());
-        adapter = new NinegridAdapter(this, beanList);
+        adapter = new NinegridAddAdapter(this, beanList);
         DdNineGridMoreLayout ddNineGridLayout = (DdNineGridMoreLayout) findViewById(R.id.nineGridLayout);
         ddNineGridLayout.setAdapter(adapter);
     }
@@ -70,11 +70,11 @@ public class NinegridActivity extends BaseActivity {
         URLS.add("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=730397068,25124339&fm=23&gp=0.jpg");
     }
 
-    private NinegridBean generateBean() {
+    private NinegridAddBean generateBean() {
         int size = URLS.size();
         Random random = new Random();
         int index = random.nextInt(size);
         String url = URLS.get(index);
-        return new NinegridBean(url);
+        return new NinegridAddBean(url);
     }
 }
