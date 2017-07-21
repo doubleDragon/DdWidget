@@ -2,13 +2,10 @@ package com.wsl.library.widget.row;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Point;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import com.wsl.library.widget.R;
 
@@ -49,16 +46,6 @@ class DdRowPhotoAbsLayout extends ViewGroup {
         if(mChildWidth <= 0) {
             throw new RuntimeException("must assign child width");
         }
-
-
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-
-        logD("screen width: " + width);
     }
 
 
@@ -72,9 +59,6 @@ class DdRowPhotoAbsLayout extends ViewGroup {
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
         int height = 0;
-
-
-        logD("spec width: " + widthSize + ",spec height: " + heightSize);
 
         int count = getChildCount();
         if(count > mColumns) {
@@ -105,7 +89,6 @@ class DdRowPhotoAbsLayout extends ViewGroup {
             View child = getChildAt(i);
             int left = mChildWidth * i + mChildGap * i;
             int right = left + mChildWidth;
-            logD("i=" + i + "[" + left + "," + top + "," + right + "," + bottom + "]");
             child.layout(left, top, right, bottom);
         }
     }
