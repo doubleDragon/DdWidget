@@ -3,6 +3,7 @@ package com.wsl.library.widget.row;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +21,10 @@ public abstract class DdRowPhotoArrayAdapter<T> extends DdRowPhotoBaseAdapter {
     private boolean mNotifyOnChange = true;
 
     public DdRowPhotoArrayAdapter(List<T> objects) {
-        this.mObjects = objects;
+        this.mObjects = new ArrayList<>();
+        if(objects != null && !objects.isEmpty()) {
+            this.mObjects.addAll(objects);
+        }
     }
 
     public void add(@Nullable T object) {
@@ -52,8 +56,15 @@ public abstract class DdRowPhotoArrayAdapter<T> extends DdRowPhotoBaseAdapter {
     }
 
     public void remove(@Nullable T object) {
+        if(mObjects.isEmpty()) {
+            return;
+        }
         synchronized (mLock) {
-            mObjects.remove(object);
+            try {
+                mObjects.remove(object);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         if (mNotifyOnChange) notifyDataSetChanged();
     }
@@ -62,6 +73,9 @@ public abstract class DdRowPhotoArrayAdapter<T> extends DdRowPhotoBaseAdapter {
      * Remove all elements from the list.
      */
     public void clear() {
+        if(mObjects.isEmpty()) {
+            return;
+        }
         synchronized (mLock) {
             mObjects.clear();
         }
